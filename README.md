@@ -2,7 +2,13 @@
 
 Automated and Interpretable Detection of Hippocampal Sclerosis
 
-AID-HS extracts hippocampal volume- and surface-based features from T1w scans, to provide an in-depth characterisation of hippocampal abnormality and provide an automated detection and lateralisation of hippocampal sclerosis (HS). For more details please read our [preprint]()
+AID-HS 
+1) Extracts hippocampal volume- and surface-based features from T1w 3T MRI scans
+2) Compares patient hippocampal morphology to normative growth charts generated from healthy controls
+3) Compares patient's left and right hippocampi
+4) Runs a logistic regression classifier to automatically detect and lateralise hippocampal sclerosis (HS)
+5) Outputs an interpretable report 
+For more details please read our [preprint]()
 
 Note: 
 - AID-HS only works on T1w scans at 3T
@@ -71,8 +77,8 @@ pip install -e .
 ## Usage
 With this software you can detect and lateralise HS from T1w MRI scans
 
-### Prior to run the pipeline: get your site code
-AID-HS uses [DistributedCombat](https://www.sciencedirect.com/science/article/pii/S1053811921010934?via%3Dihub) to remove site-scanner bias differences. Thus, prior to run prediction on a patient, you will need to do a first step of *harmonisation* to compute the parameters for the scanner used to acquire the MRI data. Each scanner will have a *site_code* that will be needed to organise your data and run the code as detailled below.
+### Prior to running the pipeline: get your site code
+AID-HS uses [DistributedCombat](https://www.sciencedirect.com/science/article/pii/S1053811921010934?via%3Dihub) to remove site-scanner bias differences. Thus, prior to running AID-HS on a patient's MRI scan, you will need to do a first step of *harmonisation* to compute the parameters for the scanner used to acquire the MRI data. Each scanner will have a *site_code* that will be needed to organise your data and run the code as detailled below.
 
 To get a *site_code* please contact *m.ripart@ucl.ac.uk* and don't forget to mention your institution and provide us with an email address. 
 
@@ -98,7 +104,7 @@ Notes:
 
 #### demographic data
 
-AID-HS provide individualised results, which are adapted for the age and sex of the patients. Thus, you will need to fill the `demographics_file.csv`  file with:
+AID-HS provides individualised results, which are adapted for the age and sex of the patients. Thus, you will need to fill the `demographics_file.csv`  file with:
 - **ID**: subject ID
 - **Site**: site_code
 - **Scanner**:  '3T' (mandatory as AID-HS does not work on other scanners)
@@ -121,7 +127,7 @@ To do so you will need:
 
 You will find an example of the `list_subjects.csv` on the `aidsh_data_folder`
 
-Before to run the command,  please ensure you are in the folder containing the AID-HS scripts and that the *aidhs_env* environment is activated:
+Before running the harmonisation command,  please ensure you are in the folder containing the AID-HS scripts and that the *aidhs_env* environment is activated:
 ```bash
 cd <path_to_aidhs_folder>
 conda activate aidhs_env
@@ -137,12 +143,12 @@ This will compute the harmonisation parameters and store them so that they can b
 ### Final step: Prediction
 
 To predict on a subject you will need 
-- The T1w scan of the subject you want to predict  
-- Have organised your the MRI data and demographics following the instructions above
+- The T1w scan of the subject you want to predict on
+- To have organised your the MRI data and demographics following the instructions above
 - The ID of the subject (`subject_id`)
-- Have run the harmonisation for the `site_code` that corresponds to the subject (see above)
+- To have run the harmonisation for the `site_code` that corresponds to the subject (see above)
 
-Before to run the command, ensure you are in the folder containing the AID-HS scripts and that the aidhs environment is activated:
+Before running the prediction command, ensure you are in the folder containing the AID-HS scripts and that the aidhs environment is activated:
 ```bash
 cd <path_to_aidhs_folder>
 conda activate aidhs_env
@@ -158,15 +164,15 @@ python scripts/preprocess/new_patient_pipeline.py -site <site_code> -id <subject
 AID-HS outputs individualised and interpretable reports that can be found at: 
 `<aidhs_data_folder>/output/prediction_reports/<subject_id>/Report_<subject_id>.pdf`
 
-These reports present:
-- **Hippocampal segmentation** & **Hippocampal pial surfaces**: HippUnfold segmentations and surface reconstructions for left and right hippocampi, alongside automated quality control scores to highlight subjects in which the segmentation might have failed. We recommend to manually check segmentation with dice scores below 0.70.
+These reports contain:
+- **Hippocampal segmentation** & **Hippocampal pial surfaces**: HippUnfold segmentations and surface reconstructions for left and right hippocampi, alongside automated quality control scores to highlight subjects in which the segmentation might have failed. We recommend manually checking segmentations with dice scores below 0.70.
 - **Individual hippocampal features vs normative trajectories**: Left and right hippocampal features mapped against normative growth charts.
 - **Asymmetries**: Feature asymmetries that indicate the magnitude and direction of asymmetries, and compared to abnormality thresholds. 
 - **Automated detection & lateralisation**: Detection and lateralisation scores from the AID-HS classifier.
 
 An example of the report for patient *H1P0003* can be found [here](images/Report_H1P0003.pdf) with interpretation below.
 
-In this example, the automated quality control scores of 0.79 and 0.81 for both left and right hippocampi, indicate good quality hippocampal segmentations. Compared with the normative growth charts, the left hippocampus features fell within the normal range of the healthy population, while the right hippocampus had features that fell outside the 5th and 95th percentiles. In the asymmetry analysis, abnormalities are lateralised to the right hippocampus, with a significant reductions in volume, thickness and gyrification, alongside increased curvature and intrinsic curvature. These findings are further supported by the automated classifier results, which indicate right hippocampal sclerosis with a predicted probability of 88.2%. 
+In this example, the automated quality control scores of 0.79 and 0.81 for both left and right hippocampi indicate good quality hippocampal segmentations. Compared with the normative growth charts, the left hippocampus features fall within the normal range of the healthy population, while the right hippocampus had features that fell outside the 5th and 95th percentiles. In the asymmetry analysis, abnormalities are lateralised to the right hippocampus, with significant reductions in volume, thickness and gyrification, alongside increased curvature and intrinsic curvature. These findings are further supported by the automated classifier results, which indicate right hippocampal sclerosis with a predicted probability of 88.2%. 
 
 
 ## Manuscript
