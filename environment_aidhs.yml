@@ -1,0 +1,29 @@
+name: aidhs_env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pandas=1.4.3
+  - statsmodels
+  - scikit-learn
+  - notebook
+  - matplotlib
+  - h5py 
+  - nibabel
+  - numpy 
+  - scipy=1.7.3
+  - pillow=9.2.0
+  - seaborn
+  - ptitprince
+  - pip
+  - pickleshare
+  - pip:
+    - neuroCombat==0.2.12
+    - fpdf==1.7.2
+    - potpourri3d==0.0.7
+    - simpleITK==2.2.0
+    - scikit-image
+    - git+https://github.com/Deep-MI/LaPy.git#egg=lapy
+    - -f https://download.pytorch.org/whl/cu113/torch_stable.html torch==1.10.0+cu113
+    - -f https://download.pytorch.org/whl/cu113/torch_stable.html torchvision==0.11.1+cu113
