@@ -11,7 +11,7 @@ AID-HS
 For more details please read our [preprint]()
 
 Note: 
-- AID-HS only works on T1w scans at 3T
+- AID-HS works on T1w scans, and has only been tested at 3T
 - You will need demographic information (age at scan, sex) to run AID-HS on your patients. 
 
 Pipeline overview:\
@@ -27,7 +27,7 @@ To use AID-HS you will need to install the prerequesites below and create the AI
 
 Notes:
 - The current installation has been tested on Ubuntu 18.04
-- **COMING SOON**: AID-HS will be packaged as a Docker/Singularity package for easier installation & use. As a result, the current installation will not be supported. 
+- **COMING SOON**: AID-HS will be packaged as a Docker/Singularity package. This will be the recommended installation method.
 
 ### Prerequisites
 
