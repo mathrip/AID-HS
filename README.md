@@ -8,7 +8,7 @@ AID-HS
 3) Compares patient's left and right hippocampi
 4) Runs a logistic regression classifier to automatically detect and lateralise hippocampal sclerosis (HS)
 5) Outputs an interpretable report 
-For more details please read our [preprint]()
+For more details please read our [preprint](https://www.medrxiv.org/content/10.1101/2023.10.13.23296991v1)
 
 Note: 
 - AID-HS works on T1w scans, and has only been tested at 3T
@@ -176,7 +176,7 @@ In this example, the automated quality control scores of 0.79 and 0.81 for both 
 
 
 ## Manuscript
-Please check out our [manuscript](TBC) to learn more.
+Please check out our preprint [manuscript](https://www.medrxiv.org/content/10.1101/2023.10.13.23296991v1) to learn more.
 
 An overview of the notebooks that we used to create the figures can be found [here](figure_notebooks.md).
 
