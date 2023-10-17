@@ -57,7 +57,7 @@ git clone https://github.com/mathrip/AID-HS.git
 # enter the aid_hs directory
 cd aidhs
 # create the aidhs_env environment with all the dependencies 
-conda env create -f environment.yml
+conda env create -f environment_aidhs.yml
 # activate the environment
 conda activate aidhs_env
 # install aid_hs package with pip (with `-e`, the development mode, to allow changes in the code to be immediately visible in the installation)
